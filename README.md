@@ -75,12 +75,39 @@ public function delete(){
     DB::table('students')->where('id', 1)->delete();
    }
 
+## join two table (students and fees)
+
+public function join(){
+   $result = DB::table('students')
+    ->join('fees', 'students.id', '=', 'fees.student_id')
+    ->select('fees.*', 'students.name', 'students.age')
+    ->get();
+    // dd($result);
+    foreach($result as $item){
+        echo $item->name.'<br>';
+        echo $item->age.'<br>';
+        echo $item->fee_amount.'<br>';
+    }
+}
+
+->join('fees', 'students.id', '=', 'fees.student_id'): This method performs an SQL join operation. It joins the 'students' table with the 'fees' table based on a condition. The condition specified here is that the 'id' column in the 'students' table should be equal to the 'student_id' column in the 'fees' table.
+
+->select('fees.*', 'students.name', 'students.age'): This method specifies which columns to retrieve from the result set. It selects all columns (fees.*) from the 'fees' table and also selects the 'name' and 'age' columns from the 'students' table.
+
+
+ 
+## data exists check 
+
+$exists = DB::table('students')->where('id',10)->exists();
+if($exists){
+    $data = DB::table('students')->where('id', 10)->first();
+    dd($data);
+}else{
+    echo 'The data not exists';
+}
 
 
 
-
-
-   
 php artisan optimize
 php artisan config:clear
 php artisan cache:clear

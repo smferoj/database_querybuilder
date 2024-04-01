@@ -12,7 +12,7 @@ class StudentController extends Controller
 
 
     // index
-//    public function index(){
+   public function index(){
 //    $all_data = DB::table('students')->get();
 //    echo '<pre>';
 //    print_r($all_data);
@@ -40,9 +40,17 @@ class StudentController extends Controller
 //    echo $single_data->email.'<br>';
 //    echo $single_data->age;
 
-   
+   // see data existing
 
+   $exists = DB::table('students')->where('id',10)->exists();
+if($exists){
+    $data = DB::table('students')->where('id', 10)->first();
+    dd($data);
+}else{
+    echo 'The data not exists';
+}
 
+   }
     // create 
     // public function create(){
         // ========single data insert====
@@ -83,8 +91,25 @@ class StudentController extends Controller
 
 // delete 
 
-public function delete(){
-    DB::table('students')->where('id', 1)->delete();
-   }
+// public function delete(){
+//     DB::table('students')->where('id', 1)->delete();
+//    }
   
+
+// join
+
+public function join(){
+   $result = DB::table('students')
+    ->join('fees', 'students.id', '=', 'fees.student_id')
+    ->select('fees.*', 'students.name', 'students.age')
+    ->get();
+    // dd($result);
+    foreach($result as $item){
+        echo $item->name.'<br>';
+        echo $item->age.'<br>';
+        echo $item->fee_amount.'<br>';
+    }
+}
+
+
     }
