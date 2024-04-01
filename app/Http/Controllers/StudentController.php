@@ -12,8 +12,7 @@ class StudentController extends Controller
 
 
     // index
-
-   public function index(){
+//    public function index(){
 //    $all_data = DB::table('students')->get();
 //    echo '<pre>';
 //    print_r($all_data);
@@ -36,23 +35,16 @@ class StudentController extends Controller
 //   }
 
   //single data 
-   $single_data = DB::table('students')->where('id',1)->first();
-   echo $single_data->name.'<br>';
-   echo $single_data->email.'<br>';
-   echo $single_data->age;
+//    $single_data = DB::table('students')->where('id',1)->first();
+//    echo $single_data->name.'<br>';
+//    echo $single_data->email.'<br>';
+//    echo $single_data->age;
+
    
 
 
-
-   }
-
-
-
-
-
-
     // create 
-    public function create(){
+    // public function create(){
         // ========single data insert====
         // DB::table('students')->insert([
         //     'name'=>'feroj',
@@ -61,19 +53,39 @@ class StudentController extends Controller
         // ]);
 
         // =============multile data inset =======
-        DB::table('students')->insert([
-            [
-            'name'=>'user-1',
-            'email'=>'user-1@gmail.com',
-            'age'=>'42',
-           ],
-            [
-            'name'=>'user-2',
-            'email'=>'user-2@gmail.com',
-            'age'=>'45',
-            ],
-    ]);
-    }
+    //     DB::table('students')->insert([
+    //         [
+    //         'name'=>'user-1',
+    //         'email'=>'user-1@gmail.com',
+    //         'age'=>'42',
+    //        ],
+    //         [
+    //         'name'=>'user-2',
+    //         'email'=>'user-2@gmail.com',
+    //         'age'=>'45',
+    //         ],
+    // ]);
+    // }
 
-    //
-}
+    
+    
+    
+    // update
+
+   public function update(){
+
+    $data =[
+        'name'=>'updatedSM',
+        'age'=>18,
+    ];
+    DB::table('students')->where('id', 1)->update($data);
+   }
+
+
+
+
+
+
+
+  
+    }

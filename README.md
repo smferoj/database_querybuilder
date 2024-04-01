@@ -57,6 +57,19 @@ $all_data = DB::table('students')->get();
    echo $single_data->age;
   
 
+<!-- update data -->
+
+  public function update(){
+
+    $data =[
+        'name'=>'updatedSM',
+        'age'=>18,
+    ];
+    DB::table('students')->where('id', 1)->update($data);
+   }
+
+
+
 php artisan optimize
 php artisan config:clear
 php artisan cache:clear
