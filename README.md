@@ -19,6 +19,15 @@
             'age'=>'45',
             ],
     ]);
+## data exists check 
+
+$exists = DB::table('students')->where('id',10)->exists();
+if($exists){
+    $data = DB::table('students')->where('id', 10)->first();
+    dd($data);
+}else{
+    echo 'The data not exists';
+}
 
 2. Show data
 
@@ -95,16 +104,10 @@ public function join(){
 ->select('fees.*', 'students.name', 'students.age'): This method specifies which columns to retrieve from the result set. It selects all columns (fees.*) from the 'fees' table and also selects the 'name' and 'age' columns from the 'students' table.
 
 
- 
-## data exists check 
 
-$exists = DB::table('students')->where('id',10)->exists();
-if($exists){
-    $data = DB::table('students')->where('id', 10)->first();
-    dd($data);
-}else{
-    echo 'The data not exists';
-}
+
+ 
+
 
 
 
