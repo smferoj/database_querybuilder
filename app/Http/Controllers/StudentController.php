@@ -72,20 +72,19 @@ class StudentController extends Controller
     
     // update
 
-   public function update(){
+//    public function update(){
 
-    $data =[
-        'name'=>'updatedSM',
-        'age'=>18,
-    ];
-    DB::table('students')->where('id', 1)->update($data);
+//     $data =[
+//         'name'=>'updatedSM',
+//         'age'=>18,
+//     ];
+//     DB::table('students')->where('id', 1)->update($data);
+//    }
+
+// delete 
+
+public function delete(){
+    DB::table('students')->where('id', 1)->delete();
    }
-
-
-
-
-
-
-
   
     }

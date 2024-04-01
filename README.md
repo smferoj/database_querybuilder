@@ -69,7 +69,18 @@ $all_data = DB::table('students')->get();
    }
 
 
+<!-- delete Data -->
 
+public function delete(){
+    DB::table('students')->where('id', 1)->delete();
+   }
+
+
+
+
+
+
+   
 php artisan optimize
 php artisan config:clear
 php artisan cache:clear
