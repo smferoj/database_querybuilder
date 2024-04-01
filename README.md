@@ -99,9 +99,140 @@ public function join(){
     }
 }
 
-->join('fees', 'students.id', '=', 'fees.student_id'): This method performs an SQL join operation. It joins the 'students' table with the 'fees' table based on a condition. The condition specified here is that the 'id' column in the 'students' table should be equal to the 'student_id' column in the 'fees' table.
 
-->select('fees.*', 'students.name', 'students.age'): This method specifies which columns to retrieve from the result set. It selects all columns (fees.*) from the 'fees' table and also selects the 'name' and 'age' columns from the 'students' table.
+## Aggregation 
+
+  $total_perosn =  DB::table('persons')->count();
+       echo($total_perosn . "<br>");
+  
+       $total_salary = DB::table('persons')->sum('salary');
+       echo($total_salary. "<br>");
+
+       $total_perosn =  DB::table('persons')->avg('salary');
+       echo($total_perosn . "<br>");
+
+       $total_perosn =  DB::table('persons')->max('age');
+       echo($total_perosn . "<br>");
+       
+       $total_perosn =  DB::table('persons')->min('age');
+       echo($total_perosn . "<br>");
+
+  ## group by with count
+  $count =  DB::table('persons')
+               ->select('country', DB::raw('COUNT(*) as total_count'))
+               ->groupBy('country')
+               ->get(); 
+
+            foreach($count as $item){
+                $country = $item->country;
+                $count = $item->total_count;
+                echo 'Country: '.$country.'<br>';
+                echo 'Total Persons: '.$count.'<br>';
+            }
+
+## Multiple Aggregates 
+$count =  DB::table('persons')
+               ->select('country', DB::raw('COUNT(*) as total_count'),
+                DB::raw('AVG(age) as avg_age'),
+                DB::raw('MAX(salary) as max_salary'),
+                
+                )
+               ->groupBy('country')
+               ->get(); 
+
+            foreach($count as $item){
+                $country = $item->country;
+                $count = $item->total_count;
+                $avg_age = $item->avg_age;
+                $max_salary = $item->max_salary;
+                echo 'Country: '.$country.'<br>';
+                echo 'Total Persons: '.$count.'<br>';
+                echo 'Agerage age: '.$avg_age.'<br>';
+                echo 'Max Salary: '.$max_salary.'<br>';
+            }
+
+
+ ## sort 
+ $all_data = DB::table('persons')->orderBy('country','asc')->get();
+
+    foreach($all_data as $item){
+        echo $item->name.'-';
+        echo $item->age.'-';
+        echo $item->salary.'-';
+        echo $item->country.'<br>';
+    }
+
+## wherein
+all_data = DB::table('persons')
+    ->whereIn('id',[1,2])
+    ->get();
+
+    foreach($all_data as $item){
+        echo $item->id.'-';
+        echo $item->name.'-';
+        echo $item->age.'-';
+        echo $item->salary.'-';
+        echo $item->country.'<br>';
+    }
+
+## pluck 
+
+$pluck = DB::table('persons')
+    ->pluck('name');
+    echo '<pre>';
+    print_r($pluck);
+
+
+## wherenot and #wherenotin
+ $all_data = DB::table('persons')
+    ->whereNot('country','India')
+    ->get();
+
+    foreach($all_data as $item){
+        echo $item->id.'-';
+        echo $item->name.'-';
+        echo $item->age.'-';
+        echo $item->salary.'-';
+        echo $item->country.'<br>';
+    }
+
+## where not in
+ $all_data = DB::table('persons')
+    ->whereNotIn('country',['India','Bd'])
+    ->get();
+
+    foreach($all_data as $item){
+        echo $item->id.'-';
+        echo $item->name.'-';
+        echo $item->age.'-';
+        echo $item->salary.'-';
+        echo $item->country.'<br>';
+    }
+## where between
+
+$all_data = DB::table('persons')
+    ->whereBetween('age',['30','50'])
+    ->get();
+
+    foreach($all_data as $item){
+        echo $item->id.'-';
+        echo $item->name.'-';
+        echo $item->age.'-';
+        echo $item->salary.'-';
+        echo $item->country.'<br>';
+    }
+$all_data = DB::table('persons')
+    ->whereNotBetween('age',['30','50'])
+    ->get();
+
+    foreach($all_data as $item){
+        echo $item->id.'-';
+        echo $item->name.'-';
+        echo $item->age.'-';
+        echo $item->salary.'-';
+        echo $item->country.'<br>';
+    }
+
 
 
 

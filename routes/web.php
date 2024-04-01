@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,6 @@ Route::get('student/index', [StudentController::class, 'index']);
 Route::get('student/update', [StudentController::class, 'update']);
 Route::get('student/delete', [StudentController::class, 'delete']);
 Route::get('student/join', [StudentController::class, 'join']);
+
+
+Route::get('person/index', [PersonController::class, 'index']);
